@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Base</title>
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    {% comment %} Bootstrap icons {% endcomment %}
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- Medium style Editor -->
+    <script src="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/js/medium-editor.min.js"></script>
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/medium-editor@latest/dist/css/medium-editor.min.css" type="text/css" media="screen" charset="utf-8">
+    {% comment %} <link rel="stylesheet" href="//cdn.jsdelivr.net/medium-editor/latest/css/medium-editor.min.css"> {% endcomment %}
+    {% comment %} <link rel="stylesheet" href="//cdn.jsdelivr.net/medium-editor/latest/css/themes/beagle.min.css"> {% endcomment %}
+    
+    <!-- Custom css -->
+    <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Faster+One&family=Montez&display=swap" rel="stylesheet">
+    <style> 
+      a:hover { 
+        text-decoration: none; 
+        } 
+    </style> 
+  </head>
+  <body class='loader'>
+
+    <nav class="navbar navbar-expand-lg bg-light techfont">
+      {% comment %} <div class="container"> {% endcomment %}
+        <div class="navbar-nav align-items-center">
+          <a class="navbar-brand bigbrand" href="{% url 'post_list' %}">My Tech blog</a>
+          <a class="nav-item nav-link" href="{% url 'about' %}">About</a>
+          <a class="nav-item nav-link" href="https://www.github.com">Github</a>
+          <a class="nav-item nav-link" href="https://www.linkedin.com">LinkedIn</a>
+        </div>
+        <div class="navbar-nav align-items-center ml-auto">
+          {% if user.is_authenticated %}
+            <a class="nav-item nav-link" href="{% url 'post_new' %}">New Post</a>
+            <a class="nav-item nav-link" href="{% url 'post_draft_list' %}">Drafts</a>
+            <a class="nav-item nav-link" href="{% url 'logout' %}">Log out</a>
+            <a >Welcome: {{ user.username }}</a>
+          {% else %}
+            <a class="nav-item nav-link loader" href="{% url 'login' %}" aria-label="Login">
+              <span class="fa fa-user" aria-hidden="true"></span></a>
+          {% endif %}
+        </div>
+      {% comment %} </div> {% endcomment %}
+    </nav>
+
+
+
+          <div class="content container">
+              <div class="row">
+                  <div class="col-md-8">
+                    <div class="blog_posts">
+                      {% block content %}
+                      {% endblock %}
+
+                    </div>
+                  </div>
+              </div>
+          </div>
+
+   
+    {% comment %} <script type="text/javascript" src="{% static 'js/blog.js' %}"></script> {% endcomment %}
+  {% comment %} <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> {% endcomment %}
+  {% comment %} <script src="//cdn.jsdelivr.net/medium-editor/latest/js/medium-editor.min.js"></script> {% endcomment %}
+  {% comment %} {% front_edit_scripts editor="medium" %} {% endcomment %}
+  </body>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+</html>
